@@ -1,0 +1,30 @@
+def total_salary(path):
+    try:
+        with open(path, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            
+            total_salary = 0
+            for line in lines:
+                # Розділяємо рядок на прізвище та зарплату
+                name, salary_str = line.strip().split(',')
+                
+                # Конвертуємо зарплату в число та додаємо до загальної суми
+                total_salary += int(salary_str)
+            
+            # Обчислюємо середню зарплату
+            avg_salary = total_salary / len(lines)
+            
+            return total_salary, avg_salary
+            
+    except FileNotFoundError:
+        print(f"Файл {path} не знайдено.")
+        return None
+
+# Приклад використання
+file_path = '/Users/valeriia/Desktop/salary_file.txt'
+result = total_salary(file_path)
+
+if result is not None:
+    total, average = result
+    print(f"Загальна сума зарплат: {total}")
+    print(f"Середня зарплата: {average}")
